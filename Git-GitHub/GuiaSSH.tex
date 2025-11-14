@@ -1,0 +1,144 @@
+\documentclass[a4paper]{article}
+
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{amsmath, amssymb}
+\usepackage[margin=2cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage{parskip}
+\usepackage[most]{tcolorbox}
+\usepackage[hidelinks]{hyperref}
+\usepackage{float}
+
+
+% cabecera
+\pagestyle{fancy}
+\fancyhead[l]{Daniel Soto}
+\fancyhead[c]{Enlazar Git-GitHub mediante SSH}
+\fancyhead[r]{\today}
+\fancyfoot[c]{\thepage}
+\renewcommand{\headrulewidth}{0.2pt} % linea horizontal
+
+
+\begin{document}
+\textbf{Inicio SSH}
+
+Verificar si se tiene una clave SSH o no.
+\begin{verbatim}
+cd ~/.ssh
+ls -a
+\end{verbatim}
+
+Si se observan archivos, borrarlos (si no se necesitan)
+\begin{verbatim}
+rm *
+\end{verbatim}
+
+Generar clave SSH usando el email de la cuenta de GitHub
+\begin{verbatim}
+ssh-keygen -t ed25519 -C "test@gmail.com"
+\end{verbatim}
+
+Agregar nombre, recomendación: \texttt{id\_rsa}
+Enter para passphrase (no poner nada)
+
+Continuar con
+\begin{verbatim}
+eval "($ssh-agent -s)"
+\end{verbatim}
+
+Para MacOS es necesario este paso intermedio:
+
+\textbf{Inicio paso intermedio para MacOS}
+\begin{verbatim}
+touch config
+\end{verbatim}
+
+y luego agregar a ese archivo \texttt{config} lo siguiente:
+\begin{verbatim}
+Host github.com
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_rsa
+\end{verbatim}
+
+Continuamos con
+\begin{verbatim}
+ssh-add --apple-use-keychain ~/.ssh/id_rsa
+\end{verbatim}
+
+Si la versión de MacOS es anterior a \textit{Monterey (12.0)}, entonces 
+no soporta \texttt{--apple-use-keychain}, en cambio, se ejecuta:
+\begin{verbatim}
+ssh-add -K ~/.ssh/id_rsa
+\end{verbatim}
+\textbf{Fin paso intermedio para MacOS}
+
+Para Linux:
+\begin{verbatim}
+ssh-add ~/.ssh/id_rsa
+\end{verbatim}
+
+Agregar la clave ubicada en \texttt{~/.ssh/id\_rsa} a GitHub
+Settings > SSH and GPG keys > New SSH key
+
+Validar la conexión
+\begin{verbatim}
+ssh -T git@github.com
+.
+.
+.
+yes
+\end{verbatim}
+\textbf{Inicio SSH}
+
+\textbf{Inicio enlace Git-GitHub}
+
+Supongamos que el usuario de GitHub es \texttt{Daniel-534}
+y que el repositorio al que vamos a subir los archivos es \texttt{AprenderGit}.
+
+Crear el repositorio en GitHub. En local, ubicarse en la carpeta donde están los archivos que
+se van a subir al repositorio de GitHub y creamos un par de archivos útiles.
+\begin{verbatim}
+touch README.md
+touch .gitignore
+\end{verbatim}
+
+Inicializamos el Git y agregamos los archivos de la carpeta.
+\begin{verbatim}
+git init
+git add -
+git commit -m "Inicialización"
+\end{verbatim}
+
+Renombramos la rama \texttt{master} como \texttt{main}.
+\begin{verbatim}
+git branch -M main
+\end{verbatim}
+
+Apuntamos al repositorio donde queremos subir los archivos
+\begin{verbatim}
+git remote add origin git@github.com:Daniel-534/AprenderGit.git
+\end{verbatim}
+
+En caso de que no funcione, entonces hacer:
+\begin{verbatim}
+git remote set-url origin git@github.com:Daniel-534/AprenderGit.git
+\end{verbatim}
+
+Para el primer \texttt{push}, hacer:
+\begin{verbatim}
+git push -u origin main
+\end{verbatim}
+
+Después, solo hacer:
+\begin{verbatim}
+git push origin main
+\end{verbatim}
+
+
+\textbf{Fin enlace Git-GitHub}
+
+\end{document}

@@ -1,0 +1,59 @@
+\documentclass[a4paper]{article}
+
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{amsmath, amssymb}
+\usepackage[margin=2cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage{parskip}
+\usepackage[most]{tcolorbox}
+\usepackage[hidelinks]{hyperref}
+\usepackage{float}
+
+
+% cabecera
+\pagestyle{fancy}
+\fancyhead[l]{Daniel Soto}
+\fancyhead[c]{Comando útiles Git-GitHub}
+\fancyhead[r]{\today}
+\fancyfoot[c]{\thepage}
+\renewcommand{\headrulewidth}{0.2pt} % linea horizontal
+
+
+\begin{document}
+
+\textbf{Cómo instalar Git en Windows}
+
+\begin{itemize}
+	\item Presionar \texttt{Windows + R}
+	\item Escribir \texttt{cmd}
+	\item Presionar \texttt{Enter}
+	\item Se va abrir la "Terminal" de Windows
+	\item Escribir el siguiente comando y ejecutarlo (presionar \texttt{Enter}) \texttt{winget install Git.Git}
+\end{itemize}
+
+
+\textbf{Verificación de la instalación}
+
+\begin{verbatim}
+git --version
+\end{verbatim}
+
+\textbf{Configuración de Usuario y Email:} en el nombre puede poner lo que quiera, en el email, debe poner exactamente la dirección de correo electrónico de tu cuenta de GitHub
+
+\begin{verbatim}
+git config --global user.name "Tu Nombre"
+git config --global user.email "tuemail@ejemplo.com"
+\end{verbatim}
+
+\textbf{Verificación de la configuración}
+
+\begin{verbatim}
+git config --list
+\end{verbatim}
+
+Ahora deberías ver como Output tu información.
+
+\end{document}

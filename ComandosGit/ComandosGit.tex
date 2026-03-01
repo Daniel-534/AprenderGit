@@ -1,0 +1,42 @@
+\documentclass[a4paper]{article}
+
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{amsmath, amssymb}
+\usepackage[margin=2cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage{parskip}
+\usepackage[most]{tcolorbox}
+\usepackage[hidelinks]{hyperref}
+\usepackage{float}
+
+
+% cabecera
+\pagestyle{fancy}
+\fancyhead[l]{Daniel Soto}
+\fancyhead[c]{Comando útiles Git-GitHub}
+\fancyhead[r]{\today}
+\fancyfoot[c]{\thepage}
+\renewcommand{\headrulewidth}{0.2pt} % linea horizontal
+
+
+\begin{document}
+
+\textbf{Cómo clonar un repositorio}
+
+\begin{verbatim}
+git clone git@github.com:Daniel-534/AprenderGit.git
+\end{verbatim}
+
+\textbf{Borrar Caché total:} Este caso surge del siguiente problema:
+
+Es posible que en cierto momento, aparezcan archivos que no necesitamos en nuestro repositorio, entonces es lo que incluímos en el \texttt{.gitignore}. Pero si ya tenemos los archivos en el GitHub y después actualizamos el \texttt{.gitignore}, notaremos que no se van a desaparecer esos archivos no deseados. Aquí lo que se debe hacer es una eliminación total del caché de manera recursiva, para que pueda entrar a todas las carpetas. El comando que se debe ejecutar es:
+
+\begin{verbatim}
+git rm -r --cached .
+\end{verbatim}
+
+
+\end{document}
